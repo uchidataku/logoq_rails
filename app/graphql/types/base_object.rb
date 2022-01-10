@@ -2,8 +2,10 @@
 module Types
   # BaseObject
   class BaseObject < GraphQL::Schema::Object
-    edge_type_class(Types::BaseEdge)
-    connection_type_class(Types::BaseConnection)
+    include GraphqlAuthenticatable
+    include Helpers::ContextAccessHelper
+
     field_class Types::BaseField
+    connection_type_class(Types::Connections::BaseConnectionType)
   end
 end
