@@ -1,0 +1,15 @@
+{
+  "name": "schema",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "node bundle_schema.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "merge-graphql-schemas": "^1.7.8"
+  }
+}

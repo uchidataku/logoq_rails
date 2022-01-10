@@ -1,0 +1,80 @@
+# createQRCode
+input CreateQRCodeInput {
+    qrPresetId: ID!
+    value: String!
+    secretData: String
+    "背景画像"
+    bgFile: String
+    "マスク画像"
+    maskFile: String
+    "エッジ画像"
+    edgeFile: String
+    "シンボル位置"
+    symbolPosition: SymbolPosition
+    "ポジセル色"
+    posiColor: String
+    "セルの形"
+    cellShape: CellShape
+    "QRコードVersion"
+    qrVersion: Int
+    "カラーモード"
+    colorMode: ColorMode
+    "出力ファイルフォーマット"
+    outputFileType: QRCodeOutputType
+    "解像度（dpi指定）"
+    dpi: Int
+    "解像度（mm指定）"
+    mmSize: Int
+    "レポート出力"
+    report: Boolean
+    "複製検知モード"
+    showCopyProtectMode: Boolean
+    "マスクモード"
+    maskMode: MaskMode
+    "余白セル数"
+    qrMargin: Int
+    "ガンマ値"
+    gamma: Float
+    "光源値"
+    dValue: DValue
+    "基準背景Ｌ値（４スミの平均）から明るい側許容値 "
+    lightnessThreshold: Int
+    "基準背景Ｌ値（４スミの平均）から暗い側許容値 "
+    darknessThreshold: Int
+    "ロゴ内でポジと判定するＬ値下限 整数"
+    minLValueAtLogo: Int
+    "背景画像を反転（ポジ）と判定するＬ値下限 整数"
+    minLValueAtBase: Int
+    "複写検知時グレイ部をポジと判定するL値下限　整数"
+    minLValAtGray: Int
+    "ベース部セルの直径の割合"
+    diaRateForBaseCell: Float
+    "ロゴ部セルの直径の割合"
+    diaRateForLogoCell: Float
+    "ポジ部セルの直径の割合"
+    diaRateForPosiCell: Float
+    "複写検知時グレイ部セルの直径の割合"
+    diaRateForGrayCell: Float
+    "jpgの画質"
+    jpgQuality: Int
+    "秘匿コードの処理モード"
+    secretMode: SecretMode
+    "複写検知時グレイ部色"
+    grayColor: String
+    "複写検知時グラデーション開始色"
+    gradient1Color: String
+    "複写検知時グラデーション中間色"
+    gradient2Color: String
+    "複写検知時グラデーション終了色"
+    gradient3Color: String
+    "複写検知時グラデーション中間色位置"
+    gradientMiddlePoz: Float
+    "CMYK変換時のプロファイルの有無"
+    isCmykProfile: Boolean
+    "CMYK変換時のプロファイルデータ"
+    cmykProfileData: String
+}
+type CreateQRCodePayload {
+    qrCode: QRCode
+}
+

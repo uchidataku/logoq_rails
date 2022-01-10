@@ -17,11 +17,11 @@ ActiveRecord::Schema.define(version: 2021_05_18_090803) do
   enable_extension "plpgsql"
 
   create_table "accounts", id: :uuid, default: -> { "gen_random_uuid()" }, comment: "アカウント", force: :cascade do |t|
+    t.string "first_name", null: false, comment: "名"
+    t.string "last_name", null: false, comment: "姓"
     t.string "email", null: false, comment: "メールアドレス"
     t.string "password_digest", null: false, comment: "パスワードのハッシュ値"
-    t.string "username", null: false, comment: "ユーザーネーム"
-    t.integer "email_verification_status", default: 0, null: false, comment: "メールアドレスの確認状態"
-    t.uuid "email_verification_token", comment: "メール確認用トークン"
+    t.integer "role", default: 0, null: false, comment: "役割"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_accounts_on_email", unique: true
