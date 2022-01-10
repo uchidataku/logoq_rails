@@ -13,7 +13,8 @@ module Mutations
     argument :metadata, String, required: true
 
     def resolve(metadata:, password:, **args)
-      data = Base64.decode64(metadata)
+      json_data = Base64.decode64(metadata)
+      data = JSON.parse(json_data).symbolize_keys
       token = Base64.decode64(data[:email_verify_token])
       fail Exceptions::UnauthorizedError unless token == ENV.fetch('RAILS_MASTER_KEY')
 
