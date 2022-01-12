@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Resolvers
-  # Account検索のリゾルバ
+  # AccountsResolver
   class AccountsResolver < BaseResolver
     type Types::AccountType.connection_type, null: false
 
