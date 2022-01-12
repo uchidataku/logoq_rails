@@ -20,7 +20,7 @@ module ExceptionHandler
       json_response({ errors: [{ description: e.message, status: 422 }] }, :unprocessable_entity)
     end
 
-    rescue_from JWT::DecodeError do
+    rescue_from Exceptions::UnauthorizedError, JWT::DecodeError do
       json_response({ errors: [{ description: 'Unauthorized', status: 401 }] }, :unauthorized)
     end
 

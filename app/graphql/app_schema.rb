@@ -6,14 +6,13 @@ class AppSchema < GraphQL::Schema
   mutation(Types::MutationType)
   query(Types::QueryType)
 
+  use GraphQL::Batch
+  connections.add ActiveRecord::Result, GraphQL::Relay::ArrayConnection
+
   # Union and Interface Resolution
   def self.resolve_type(_abstract_type, _obj, _ctx)
-    # TODO: Implement this function
-    # to return the correct object type for `obj`
-    fail(GraphQL::RequiredImplementationMissingError)
+    Types.const_get("#{obj.class}Type")
   end
-
-  # Relay-style Object Identification:
 
   # Return a string UUID for `object`
   def self.id_from_object(object, type_definition, query_ctx)

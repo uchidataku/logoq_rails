@@ -3,26 +3,17 @@
 class Account < ApplicationRecord
   include JWT::Authenticatable
 
-  module EmailVerificationStatus
-    UNSPECIFIED = 'unspecified'
-    REQUESTED = 'requested'
-    VERIFIED = 'verified'
+  module Role
+    CUSTOMER = 'customer'
+    ADMIN = 'admin'
   end
 
   has_secure_password
 
   # Enum
-  enum email_verification_status: { unspecified: 0, requested: 1, verified: 2 }, _prefix: true
-
-  # Associations
-  has_one_attached :avatar
+  enum role: { customer: 0, admin: 1 }, _prefix: true
 
   # Validations
   validates :email, presence: true, uniqueness: true, format: URI::MailTo::EMAIL_REGEXP
   validates :password, length: { minimum: 8 }, if: -> { password.present? }
-
-  # Methods
-  def avatar_url
-    url_for(avatar)
-  end
 end

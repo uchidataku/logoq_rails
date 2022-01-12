@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 module Exceptions
+  class UnauthorizedError < StandardError; end
+
   module Graphql
     # エラーコード
     module ErrorCode

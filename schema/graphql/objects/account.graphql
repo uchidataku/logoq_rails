@@ -1,0 +1,34 @@
+"Account Object"
+type Account implements Node & Record {
+    id: ID!
+    firstName: String!
+    lastName: String!
+    email: String!
+    password: String
+    role: AccountRole!
+
+    notifications(
+        first: Int
+        after: String
+        last: Int
+        before: String
+    ): NotificationConnection!
+
+    createdAt: Time!
+    updatedAt: Time!
+}
+
+enum AccountRole {
+    ADMIN
+    CUSTOMER
+}
+
+type AccountEdge {
+    cursor: String!
+    node: Account
+}
+
+type AccountConnection {
+    pageInfo: PageInfo!
+    edges: [AccountEdge]
+}

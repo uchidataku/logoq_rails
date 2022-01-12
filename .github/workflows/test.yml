@@ -46,7 +46,7 @@ jobs:
 
     env:
       DATABASE_HOST: postgres
-      DATABASE_NAME: tick_note_test
+      DATABASE_NAME: logoq_rails_test
       DATABASE_USERNAME: deploy
       DATABASE_PASSWORD: password
       APP_HOST: example.com

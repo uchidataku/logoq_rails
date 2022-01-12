@@ -9,13 +9,13 @@ default: &default
 
 development:
   <<: *default
-  database: tick_note_development
+  database: logoq_rails_development
 
 test:
   <<: *default
-  database: tick_note_test
+  database: logoq_rails_test
 
 production:
   <<: *default
-  database: tick_note_production
+  database: logoq_rails_production
   password: <%= ENV['APP_DATABASE_PASSWORD'] %>

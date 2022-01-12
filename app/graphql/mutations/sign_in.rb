@@ -1,17 +1,16 @@
 # frozen_string_literal: true
 module Mutations
-  # サインアップMutation
-  class SignUpAccount < BaseMutation
+  # SignIn
+  class SignIn < BaseMutation
     field :account, Types::AccountType, null: false
     field :token, String, null: false
 
-    argument :username, String, required: true
     argument :email, String, required: true
     argument :password, String, required: true
-    argument :password_confirmation, String, required: true
 
-    def resolve(**args)
-      account = Account.create!(args)
+    def resolve(email:, password:)
+      account = Account.find_by!(email: email)
+      fail Exceptions::UNAUTHORIZED_ERROR unless account.authenticate(password)
 
       { account: account, token: account.jwt }
     end

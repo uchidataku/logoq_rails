@@ -1,0 +1,62 @@
+#RegisterTemp
+input TempRegisterInput {
+    email: String!
+}
+
+type TempRegisterPayload {
+    email: String! # status: okと本登録用メールを送信するだけ（emailは返してるだけ）
+}
+
+#ResendConfirmEmail
+input ResendConfirmEmailInput {
+    email: String!
+}
+
+type ResendConfirmEmailPayload {
+    email: String! #（emailは返してるだけ）
+}
+
+#SignUp
+input SignUpInput {
+    firstName: String!
+    lastName: String!
+    password: String!
+    metadata: String! # { "email_verify_token": "xxx","temp_register": "xxx" }をbase64でエンコードしたものをURLのクエリ経由でフロントに渡す
+}
+
+type SignUpPayload {
+    account: Account
+    token: String
+}
+
+#SignIn
+input SignInInput {
+    email: String!
+    password: String!
+}
+
+type SignInPayload {
+    account: Account
+    token: String
+}
+
+# UpdateAccount
+input UpdateAccountInput {
+    accountId: ID!
+    firstName: String
+    lastName: String
+    newEmail: String
+    password: String
+    newPassword: String
+}
+type UpdateAccountPayload {
+    account: Account
+}
+
+# DeleteAccount
+input DeleteAccountInput {
+    accountId: ID!
+}
+type DeleteAccountPayload {
+    account: Account
+}

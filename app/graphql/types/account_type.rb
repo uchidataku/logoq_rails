@@ -1,14 +1,14 @@
 # frozen_string_literal: true
+
 module Types
   # AccountType
   class AccountType < Types::BaseObject
-    field :id, ID, null: false
-    field :email, String, null: false
-    field :username, String, null: false
-    field :avatar_url, String, null: true
-    field :email_verification_status, Enums::AccountEmailVerificationStatusType, null: false
+    implements GraphQL::Types::Relay::Node, Interfaces::RecordType
 
-    field :created_at, DateTimeType, null: false
-    field :updated_at, DateTimeType, null: false
+    field :id, ID, null: false
+    field :first_name, String, null: false
+    field :last_name, String, null: false
+    field :email, String, null: false
+    field :role, Enums::AccountRoleType, null: false
   end
 end
