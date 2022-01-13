@@ -5,7 +5,7 @@ module Types
   class AccountType < Types::BaseObject
     implements GraphQL::Types::Relay::Node, Interfaces::RecordType
 
-    field :id, ID, null: false
+    global_id_field :id
     field :first_name, String, null: false
     field :last_name, String, null: false
     field :email, String, null: false

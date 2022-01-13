@@ -9,26 +9,18 @@ class AppSchema < GraphQL::Schema
   use GraphQL::Batch
   connections.add ActiveRecord::Result, GraphQL::Relay::ArrayConnection
 
-  # Union and Interface Resolution
-  def self.resolve_type(_abstract_type, _obj, _ctx)
-    Types.const_get("#{obj.class}Type")
-  end
+  class << self
+    def resolve_type(_abstract_type, obj, _ctx)
+      Types.const_get("#{obj.class}Type")
+    end
 
-  # Return a string UUID for `object`
-  def self.id_from_object(object, type_definition, query_ctx)
-    # Here's a simple implementation which:
-    # - joins the type name & object.id
-    # - encodes it with base64:
-    # GraphQL::Schema::UniqueWithinType.encode(type_definition.name, object.id)
-  end
+    def id_from_object(object, _type = nil, _ctx = {})
+      self::UniqueWithinType.encode(object.class.name, object.id, separator: ':')
+    end
 
-  # Given a string UUID, find the object
-  def self.object_from_id(id, query_ctx)
-    # For example, to decode the UUIDs generated above:
-    # type_name, item_id = GraphQL::Schema::UniqueWithinType.decode(id)
-    #
-    # Then, based on `type_name` and `id`
-    # find an object in your application
-    # ...
+    def object_from_id(node_id, _ctx = {})
+      type_name, object_id = self::UniqueWithinType.decode(node_id, separator: ':')
+      Object.const_get(type_name).find(object_id)
+    end
   end
 end
